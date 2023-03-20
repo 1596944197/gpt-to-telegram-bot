@@ -13,22 +13,37 @@ if (!token) {
 
 const gpt = createGptChat({
   apiKey: process.env.OPENAI_API_KEY || '',
+  baseUrl: process.env.OPENAI_BASE_URL || '',
 })
 
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, { polling: true });
 
-// Matches "/echo [whatever]"
-bot.onText(/\/b (.+)/, async (msg, match) => {
+// # 在用户输入斜杠时给予提示
+bot.setMyCommands([{ command: 'start', description: '触发聊天,有效期为10分钟' }])
 
-  const chatId = msg.chat.id;
-  const resp = match?.[1] || '';
+let isReady = false
+// # 匹配
+bot.onText(/\/start/, async (msg, match) => {
+  if (isReady) return
+  isReady = true
+  setTimeout(() => {
+    isReady = false
+  }, 600000);
+});
 
+bot.on('message', async (event, msgType) => {
+  if (!isReady) return
+  if (event.from?.is_bot) return
+  const chatId = event.chat.id;
+  const text = event.text
+  debugger
   try {
-    const aiText = await gpt.sendMessage(resp)
+    const aiText = await gpt.sendMessage(text)
     bot.sendMessage(chatId, aiText);
   } catch (error) {
     console.warn(error)
     bot.sendMessage(chatId, '出错了');
   }
-});
+})
+
