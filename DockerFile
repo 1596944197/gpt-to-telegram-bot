@@ -1,0 +1,16 @@
+FROM node:lts-alpine
+
+ENV NODE_ENV=production
+
+RUN apk add --no-cache git
+
+RUN npm install -g pnpm --loglevel=error
+
+WORKDIR /app
+
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --prod --no-lockfile --prefer-offline --no-fund --no-audit
+
+COPY . .
+
+CMD ["node", "./index.mjs"]
