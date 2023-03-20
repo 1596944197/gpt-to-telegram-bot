@@ -9,7 +9,7 @@ RUN npm install -g pnpm --loglevel=error
 WORKDIR /app
 
 COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --prod --no-lockfile --prefer-offline --no-fund --no-audit
+RUN pnpm install --prod
 
 COPY . .
 
