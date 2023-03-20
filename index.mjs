@@ -36,8 +36,13 @@ bot.on('message', async (event, msgType) => {
   if (!isReady) return
   if (event.from?.is_bot) return
   const chatId = event.chat.id;
-  const text = event.text
-  debugger
+  const text = event.text;
+
+  if (text?.toLocaleLowerCase() === 'reset') {
+    gpt.reset()
+    bot.sendMessage(chatId, '重置成功');
+    return
+  }
   try {
     const aiText = await gpt.sendMessage(text)
     bot.sendMessage(chatId, aiText);

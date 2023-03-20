@@ -3,12 +3,12 @@ lockfileVersion: 5.4
 specifiers:
   '@types/node-telegram-bot-api': ^0.61.3
   dotenv: ^16.0.3
-  gpt-api: ^1.0.2
+  gpt-api: latest
   node-telegram-bot-api: ^0.61.0
 
 dependencies:
   dotenv: 16.0.3
-  gpt-api: 1.0.2
+  gpt-api: 1.0.5
   node-telegram-bot-api: 0.61.0
 
 devDependencies:
@@ -381,8 +381,8 @@ packages:
       get-intrinsic: 1.2.0
     dev: false
 
-  /gpt-api/1.0.2:
-    resolution: {integrity: sha512-Blye5DebrzsqAjYz+IctGx+pDxBfTpE1jf7pfxC9UP4Axq4YKKrA4NyyVFDZeOWP8I483oXClLJ2WcATxSj7Nw==}
+  /gpt-api/1.0.5:
+    resolution: {integrity: sha512-3CmBtZ61WHoKtP5fsRSlskZHmhxwCJkK6IYb4wDhKVLwL0L/TgmClkdO3gY+tdzuEprYwNQ18yoeloP89GQh0g==}
     dependencies:
       dayjs: 1.11.7
       node-fetch: 3.3.1
